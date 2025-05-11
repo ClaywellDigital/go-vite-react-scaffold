@@ -3,27 +3,27 @@ questions:
     prompt:
       message: "Description of the project"
       default: "A Go backend with React frontend application using Bun"
-  
+
   - name: author
     prompt:
       message: "Author name"
-  
+
   - name: email
     prompt:
       message: "Author email"
-  
+
   - name: go_module_path
     prompt:
       message: "Go module path (e.g., github.com/username/repo)"
-      default: "github.com/{{.Scaffold.author}}/{{.ProjectKebab}}"
-  
+      default: "github.com/{{ .Scaffold.author }}/{{ .ProjectKebab }}"
+
   - name: include_database
     prompt:
       confirm: "Include database setup (PostgreSQL)?"
       default: false
 
 computed:
-  year: "{{ now | date \"2006\" }}"
+  year: '{{ now | date "2006" }}'
 
 features:
   - value: "{{ .Scaffold.include_database }}"
@@ -34,35 +34,35 @@ features:
 messages:
   pre: |
     # Go + React Scaffold with Bun
-    
+
     This scaffold will create a new project with:
     - Go backend
     - React frontend (using Vite + Bun)
     - Simple CI/CD pipeline using GitHub Actions
-    
+
   post: |
     # {{ .Project }} created successfully!
-    
+
     To get started:
-    
+
     ```bash
     cd {{ .ProjectKebab }}
-    
+
     # Start the application using Docker Compose
     docker-compose up
     ```
-    
+
     Your backend will be available at http://localhost:8080
     Your frontend will be available at http://localhost:5173
-    
+
     Or run each component individually:
-    
+
     ```bash
     # Start backend
     cd backend
     go mod tidy
     go run cmd/server/main.go
-    
+
     # Start frontend
     cd ../frontend
     bun install
